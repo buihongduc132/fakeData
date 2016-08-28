@@ -1,0 +1,617 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes">
+    <link rel="shortcut icon" href="http://stc.web.zalo.zdn.vn/images/favicon.png" type="image/x-icon">
+    <title>Zalo</title>
+    <link href="http://stc.web.zalo.zdn.vn/css/base-1.02.css" rel="stylesheet" type="text/css">
+    <link href="http://stc.web.zalo.zdn.vn/css/layout-1.34.css" rel="stylesheet" type="text/css">
+    <link href="http://stc.web.zalo.zdn.vn/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="http://stc.web.zalo.zdn.vn/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://stc.web.zalo.zdn.vn/css/nanoscroller-1.03.css" rel="stylesheet" type="text/css">
+    <link href="http://stc.web.zalo.zdn.vn/css/chosen.css" rel="stylesheet" type="text/css">
+    <link href="http://stc.web.zalo.zdn.vn/css/jquery.fancybox-1.00.css" rel="stylesheet" type="text/css">
+    <link href="http://stc.web.zalo.zdn.vn/css/contextMenu.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+              <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <![endif]-->
+    <!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
+    <script async="" src="http://stc.za.zaloapp.com/stag-za.js"></script><script async="" src="//www.google-analytics.com/analytics.js"></script>
+    <script type="text/javascript">
+        document.domain = 'zaloapp.com'; var ZWebConfig = { title:'Zalo', domain:'http://web.zaloapp.com/', static_domain:'http://stc.web.zalo.zdn.vn/',
+        api_domain:"http://api.wpa.zaloapp.com", auth_domain:"https://wpa.zaloapp.com", mp3_domain:'http://voice.web.zalo.zdn.vn/v',
+        uin:'c691e6f56e88976839c9594cb5093a3e', chat_polling:'http://p1.msg.zaloapp.com', ctr_polling:'http://p1.ctrl.zaloapp.com:443',
+        list_dg:'1703811179507381808,1553757439151595826', lastActionId: 0, zaloweb_version: 3, max_file: 9, max_msg_per_user:
+        1000, max_user_chat: 20, max_member: 100, max_size_photo: 2, max_size_share_file: 20, max_time_msg_undo: 300000,
+        next_file_time: 1000, restricted_ext: ".exe,.bat,.cmd,.com", google_map_url: "http://maps.googleapis.com/maps/api/js?key=AIzaSyD1dA8BuFHku11mUo6DVJeqJ67RJN8By7M&libraries=places",
+        }
+        </script>
+    <script type="text/javascript" src="http://stc.web.zalo.zdn.vn/js/aes.js"></script>
+    <style type="text/css">
+        .fancybox-margin {
+            margin-right: 0px;
+        }
+    </style><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script></head>
+
+<body data-pinterest-extension-installed="cr1.39.2" cz-shortcut-listen="true">
+    <div id="loadpage" style="display: none; margin-top: 200px;">
+        <center>
+            <div class="spinner1" style="">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </center>
+        <center style="color:#38b3e2">Đang tải...</center>
+    </div>
+    <div class="tips-page" style="display: block;" id="webnotify"><a href="javascript:;" id="webnotify_enable">Click vào đây</a> để kích hoạt tính năng thông báo tin nhắn mới trên máy
+        tính
+        <a href="javascript:;" id="webnotify_hide" class="btn-exit"></a>
+    </div>
+    <div id="wrapper" style="display: block;">
+        <div class="wrapper-inside" id="wrapper_child" style="height: 983px;">
+            <a class="btn-feedback" data-toggle="modal" title="Phản hồi về Zalo" id="fb_menu">Phản hồi</a>
+            <a class="btn-logout" title="Đăng xuất" data-toggle="modal" id="logout_show">Logout</a>
+            <div class="nav-link">
+                <ul class="clearfix">
+                    <li><a class="msg-ico active" href="#" id="chat_menu" title="Tin nhắn">Tin nhắn</a>
+                        <span id="urc_note" class="num" style="display: none;"></span>
+                    </li>
+                    <li><a class="contact-ico" href="#" id="contact_menu" title="Danh bạ">Danh bạ</a></li>
+                    <li><a class="group-ico" href="#" id="addgroup_menu" data-toggle="modal" title="Tạo nhóm">Tạo nhóm trò chuyện</a></li>
+                    <li><a class="setting-ico" href="#" id="setting_menu" data-toggle="modal" title="Thiết lập">Thiết lập</a></li>
+                </ul>
+            </div>
+            <div class="wrap-contact" id="wrap_contact">
+                <div class="top-search">
+                    <div class="search-inside"><i></i><input type="text" id="inputSearch" placeholder="Tìm kiếm" style="display: block;">
+                        <a class="clear" id="clear_text" href="javascript:;" style="display: none;"></a>
+                    </div>
+                    <!-- Begin tab friend-group-->
+                    <ul class="tab-filter clearfix" id="tab_contact" style="display: none">
+                        <li><a class="active" href="#" id="tab_friend">Bạn bè</a></li>
+                        <li><a href="#" id="tab_group">Nhóm</a></li>
+                    </ul>
+                    <!-- End tab friend-group-->
+                </div>
+                <!-- Begin left menu-->
+                <div class="list-contact" id="left_menu" style="height: 922px;">
+                    <div class="nano has-scrollbar" id="nano1">
+                        <div class="overthrow nano-content" id="left_container" tabindex="0" style="right: -15px;">
+                            <ul class="clearfix">
+                                <li class="clearfix" id="li_7479683659103669000">
+                                    <a href="#" class="active" id="cl_7479683659103669000" onclick="ZWebChat.selectChatItem('7479683659103669000',false);return false;"><span class="img"><img src="//s120.avatar.talk.zdn.vn/1/e/2/5/10/120/5568e90194e97e53261cceb89980b2e2.jpg"></span>
+                                        <h2><span>Trinh</span><span class="timer" id="t7479683659103669000" rel="1472351182268">2 phút</span></h2>
+                                        <p class="summary"><span style="opacity: 1;">À, tập son phấn từ từ đi :D</span><span class="num" style="opacity: 1;"></span></p>
+                                    </a><a href="javascript:;" class="remove-func" title="Xóa" onclick="ZWebChat.msgChatDelete(event,'7479683659103669000');return false;">Xóa</a></li>
+                            </ul>
+                        </div>
+                        <div class="nano-pane" style="display: none;">
+                            <div class="nano-slider" style="height: 907px; transform: translate(0px, 0px);"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End left menu-->
+            </div>
+            <!-- Begin list chat-->
+            <div class="wrap-content" id="main_contant">
+                <div id="current_chat" style="display: block;">
+                    <div class="head-msg"><span class="img"><img src="//s120.avatar.talk.zdn.vn/1/e/2/5/10/120/5568e90194e97e53261cceb89980b2e2.jpg"></span>
+                        <h2>Trinh</h2>
+                        <p id="lasttime_7479683659103669000">Vừa mới truy cập</p>
+                        <div class="action-group clearfix"><a id="notify_conv" class="func-default func-off-notify">Tắt thông báo</a><a id="group_action" class="func-default func-add-group"
+                                href="#" title="Thêm vào nhóm" style="display: none;">Thêm vào nhóm</a></div>
+                    </div>
+                </div>
+                <div class="ctn-msg ctn-guest" id="p_chat_content" style="display: block; height: 860px;">
+                    <div style="" id="notice_line" class="guest-line">
+                        <p>Người này chưa được thêm vào danh bạ, hãy lưu ý khi trò chuyện</p>
+                    </div>
+                    <div class="overlay-main-msg" id="drag_in">
+                        <span>Thả tập tin vào đây để gửi</span>
+                    </div>
+                    <div class="nano" id="nano2">
+                        <div class="overthrow nano-content" id="chat_scroll">
+                            <div class="group-msg" id="chat_content" style="opacity: 1;">
+                                <div class="timer-line"><span>14:47 Chủ nhật, ngày 21 tháng 08 năm 2016</span></div>
+                                <div class="isyou"><span class="avatar"><img src="//s120.avatar.talk.zdn.vn/8/6/d/5/112/120/89dda82a11e18cdb8059efa74a08ee78.jpg"><i class="timer">14:47</i></span>
+                                    <div
+                                        class="desc">
+                                        <p class="first" id="msg1943534161541546813_1471700332294">Có đi chơi hơm</p>
+                                        <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="isyou isme"><span class="avatar"><img src="//avatar.talk.zdn.vn/d/9/a/2/2/75/035460b2f33ff21d2ce605b31b846820.jpg"><i class="timer">14:47</i></span>
+                                <div
+                                    class="desc">
+                                    <p class="first" id="msg1943534161541546813_1471728113058">Èo, cúi tuần mà, có muốn a cũng ko đi dc <img src="http://stc.web.zalo.zdn.vn/images/emoticon/zing_14.png"></p>
+                                    <div
+                                        class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="timer-line"><span>14:32 Thứ Năm, ngày 25 tháng 08 năm 2016</span></div>
+                    <div class="isyou"><span class="avatar"><img src="//s120.avatar.talk.zdn.vn/8/6/d/5/112/120/89dda82a11e18cdb8059efa74a08ee78.jpg"><i class="timer">14:32</i></span>
+                        <div
+                            class="desc">
+                            <p class="first" id="msg1943534161541546813_1472110360799">Mập</p>
+                            <p id="msg1943534161541546813_1472110364813">Hiện thân đê</p>
+                            <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="isyou isme"><span class="avatar"><img src="//avatar.talk.zdn.vn/d/9/a/2/2/75/035460b2f33ff21d2ce605b31b846820.jpg"><i class="timer">14:33</i></span>
+                    <div
+                        class="desc">
+                        <p class="first" id="msg1943534161541546813_1472110394870">Đây e <img src="http://stc.web.zalo.zdn.vn/images/emoticon/zing_13.png"></p>
+                        <p id="msg1943534161541546813_1472110405691">Về quê chưa ?</p>
+                        <div class="clear"></div>
+                </div>
+            </div>
+            <div class="isyou"><span class="avatar"><img src="//s120.avatar.talk.zdn.vn/8/6/d/5/112/120/89dda82a11e18cdb8059efa74a08ee78.jpg"><i class="timer">14:35</i></span>
+                <div
+                    class="desc">
+                    <p class="first" id="msg1943534161541546813_1472110458336">Chứ</p>
+                    <p id="msg1943534161541546813_1472110460066">Chưa</p>
+                    <p id="msg1943534161541546813_1472110464549">Đang xem phim</p>
+                    <p id="msg1943534161541546813_1472110470359">Gần bắt đc hunbg thủ r</p>
+                    <p id="msg1943534161541546813_1472110479386">Wifi limted j đó</p>
+                    <p id="msg1943534161541546813_1472110486041">Mà đt bắt đc</p>
+                    <p id="msg1943534161541546813_1472110490909">Lap bị zậy</p>
+                    <p id="msg1943534161541546813_1472110498809">Mần răng mí hết hả a</p>
+                    <div class="clear"></div>
+            </div>
+        </div>
+        <div class="isyou isme"><span class="avatar"><img src="//avatar.talk.zdn.vn/d/9/a/2/2/75/035460b2f33ff21d2ce605b31b846820.jpg"><i class="timer">14:36</i></span>
+            <div
+                class="desc">
+                <p class="first" id="msg1943534161541546813_1472110577055">Èo, rất tiếc là a ko biết =))</p>
+                <div class="clear"></div>
+        </div>
+    </div>
+    <div class="isyou"><span class="avatar"><img src="//s120.avatar.talk.zdn.vn/8/6/d/5/112/120/89dda82a11e18cdb8059efa74a08ee78.jpg"><i class="timer">14:38</i></span>
+        <div
+            class="desc">
+            <p class="first" id="msg1943534161541546813_1472110671076">A k biết sao e xem đc hung thủ đây</p>
+            <p id="msg1943534161541546813_1472110680801">Này coi ké mà</p>
+            <div class="clear"></div>
+    </div>
+    </div>
+    <div class="isyou isme"><span class="avatar"><img src="//avatar.talk.zdn.vn/d/9/a/2/2/75/035460b2f33ff21d2ce605b31b846820.jpg"><i class="timer">14:38</i></span>
+        <div
+            class="desc">
+            <p class="first" id="msg1943534161541546813_1472110685877">Vo6 dt coi <img src="http://stc.web.zalo.zdn.vn/images/emoticon/zing_13.png"></p>
+            <div class="clear"></div>
+    </div>
+    </div>
+    <div class="isyou"><span class="avatar"><img src="//s120.avatar.talk.zdn.vn/8/6/d/5/112/120/89dda82a11e18cdb8059efa74a08ee78.jpg"><i class="timer">14:38</i></span>
+        <div
+            class="desc">
+            <p class="first" id="msg1943534161541546813_1472110702516">Hoy đt mún hư dòi</p>
+            <p id="msg1943534161541546813_1472110705716">Coi chán lắm</p>
+            <div class="clear"></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div id="voice_msg" class="" style="display: none;"></div>
+    <div id="new_msg_notify" class="new-mess" style="display: none;cursor: pointer">
+        <p>Tin nhắn mới</p>
+        <img src="http://stc.web.zalo.zdn.vn/images/ic_down.png" class="bounce">
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div id="voice_msg"></div>
+    <div id="new_msg_notify" class="new-mess" style="display: none;cursor: pointer">
+        <p>Tin nhắn mới</p>
+        <img src="http://stc.web.zalo.zdn.vn/images/ic_down.png" class="bounce">
+    </div>
+    <div class="nano-pane" style="display: block;">
+        <div class="nano-slider" style="height: 407px; transform: translate(0px, 419px);"></div>
+    </div>
+    </div>
+    <p class="writing-stt" id="user-typing"></p>
+    </div>
+    <div class="post-msg" id="inputChat1">
+        <a href="javascript:;" class="btn btn-primary btn-send" id="btn_send" onclick="var evt = {keyCode: 13, stopPropagation: ZWebUI.chatOnKeyUp()}; ZWebUI.chatOnKeyDown(evt);">Gửi</a>
+        <ul class="more-action clearfix">
+            <li>
+                <div class="ctn">
+                    <form style="width: 0px;height: 0px;" id="frm_upload" method="post" target="if_upload" enctype="multipart/form-data">
+                        <div class="fileUpload" title="Gửi hình ảnh">
+                            <span>Upload</span>
+                            <input multiple="" id="zweb_file" accept="image/*" type="file" class="upload" name="fileContent" onchange="ZWebUpload.uploadAction(true);"
+                                title="Gửi hình ảnh">
+                        </div>
+                        <input type="hidden" id="up_toId" name="toId" value="">
+                        <input type="hidden" id="up_gid" name="gid">
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class="ctn">
+                    <form style="width: 0px;height: 0px;" id="frm_upload2" method="post" target="if_upload2" enctype="multipart/form-data">
+                        <div class="fileUpload fileUpload-file" title="Gửi tập tin">
+                            <span>Upload</span>
+                            <input multiple="" type="file" class="upload" id="zweb_file2" name="fileContent" onchange="ZWebUpload.uploadAction();" title="Gửi tập tin">
+                        </div>
+                        <input type="hidden" id="up_toId2" name="toId" value="">
+                        <input type="hidden" id="up_gid2" name="gid">
+                    </form>
+                </div>
+            </li>
+            <li id="li_voice">
+                <div class="ctn">
+                    <a href="#" class="ic-voicemess" id="send_voice">Voice</a>
+                </div>
+            </li>
+        </ul>
+        <div class="wrap-textarea" id="wrap_textarea">
+            <div class="func-emo dropdown" id="li_stickers">
+                <a id="zweb_emotion" data-toggle="dropdown" class="ico c-emotion" title="Chèn emoticon" href="#"></a>
+                <div role="menu" aria-labelledby="dLabel" class="popover-sticker">
+                    <a href="javascript:;" class="btn-prev disabled" id="sticker_prev">Prev</a>
+                    <ul class="nav-sticker clearfix" role="tablist" id="emo_tab"></ul>
+                    <a href="javascript:;" class="btn-next disabled" id="sticker_next">Next</a>
+                    <div class="tab-content sticker-inside" id="list_emo"></div>
+                </div>
+            </div>
+            <textarea onpaste="ZWebUI.chatOnPaste(event);" name="chatting" maxlength="3000" id="inputChat"></textarea>
+        </div>
+    </div>
+    <div id="p_info" style="display: none;"></div>
+    </div>
+    <!-- End list chat-->
+    </div>
+    </div>
+    <!-- Modal -->
+    <div id="alert-popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:400px">
+            <div class="modal-content modal-tranx">
+                <div class="modal-header">
+                    <h2 id="alert_title">Thông báo</h2>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" title="Đóng">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="ctn-setting clearfix" id="alert_content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="feedback" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:400px">
+            <div class="modal-content modal-tranx">
+                <div class="modal-header">
+                    <h2>Góp ý phản hồi cho Zalo</h2>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" title="Đóng">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="ctn-setting clearfix" id="fb_content">
+                    </div>
+                    <div id="fb_error" style="color: red"></div>
+                </div>
+                <div class="modal-footer mf-btn">
+                    <a class="btn btn-default btn-send" id="fb_send" href="#">Gửi phản hồi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="setting" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:450px">
+            <div class="modal-content modal-tranx">
+                <div class="modal-header">
+                    <h2>Thiết lập</h2>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" title="Đóng">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="ctn-setting clearfix">
+                        <div class="form-default">
+                            <div class="group-form">
+                                <p class="clearfix">
+                                    <span class="ctn"><input id="a1" type="checkbox" name="a1" value="1"></span>
+                                    <label class="label" for="a1">Âm báo tin nhắn mới</label>
+                                </p>
+                                <p class="clearfix" id="noti_popup">
+                                    <span class="ctn"><input id="a2" type="checkbox" name="a2" value="1"></span>
+                                    <label class="label" for="a2">Popup thông báo trên màn hình nền (desktop)</label>
+                                </p>
+                                <p class="clearfix end">
+                                    <span class="ctn"><input id="a3" type="checkbox" name="a3" value="1"></span>
+                                    <label class="label" for="a3">Xóa lịch sử trò chuyện khi đăng xuất</label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mf-btn">
+                    <a class="btn btn-default btn-send" href="javascript:;" id="save_setting">Lưu thiết lập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+    <div id="logout" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:400px">
+            <div class="modal-content modal-tranx">
+                <div class="modal-header">
+                    <h2>Thông báo</h2>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" title="Đóng">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="ctn-setting clearfix">
+                        <p style="text-align:center"><strong>Bạn có muốn đăng xuất khỏi <b>Zalo Web</b></strong></p>
+                        <div class="form-default otr">
+                            <div class="group-form" style="margin-left:40px">
+                                <p class="clearfix">
+                                    <span class="ctn"><input id="his_clr" type="checkbox" checked=""></span>
+                                    <label class="label" for="his_clr">Xóa lịch sử trò chuyện khi đăng xuất</label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mf-btn">
+                    <a class="btn btn-default btn-send" href="#" id="logout_menu">Có</a>
+                    <a class="btn btn-default btn-send" href="#" id="close_logout">Không</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+    <!-- Modal -->
+    <div id="modal-group" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:860px">
+            <div class="modal-content modal-tranx">
+                <div class="modal-header">
+                    <h2 id="addgroup_title">Tạo nhóm</h2>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" title="Đóng">×</button>
+                </div>
+                <div class="modal-body" id="body_group_add">
+                    <div class="wrap-contact" id="contact_group">
+                    </div>
+                    <div class="main-group-module" id="member_group_list">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+    <!-- Modal -->
+    <div id="tips-popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+        data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm" style="width:746px">
+            <div class="modal-content modal-tranx modal-tp" id="guide_content">
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+    <div id="location-popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:500px">
+            <div class="modal-content modal-tranx">
+                <div class="modal-header">
+                    <h3 id="addgroup_title">&nbsp;Vị trí</h3>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" title="Đóng">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="ctn-setting clearfix" id="location_content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="off-notify" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:450px">
+            <div class="modal-content modal-tranx">
+                <div class="modal-header">
+                    <h2>Tắt thông báo</h2>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" title="Đóng lại">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="ctn-setting clearfix">
+                        <div class="form-default">
+                            <div class="group-form" id="notify_content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mf-btn">
+                    <a class="btn btn-default" id="notify_save">Lưu thiết lập</a><a class="btn btn-primary" id="notify_cancel">Hủy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+    <div id="alert-popup-disable" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:400px">
+            <div class="modal-content modal-tranx">
+                <div class="modal-header">
+                    <h2>Thông báo</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="ctn-setting clearfix" id="alert_content_disable">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="http://stc.web.zalo.zdn.vn/js/jquery.js"></script>
+    <script src="http://stc.web.zalo.zdn.vn/js/bootstrap.min.js"></script>
+    <script src="http://stc.web.zalo.zdn.vn/js/jquery.nanoscroller-1.02.js"></script>
+    <script src="http://stc.web.zalo.zdn.vn/js/chosen.jquery.min.js"></script>
+    <script src="http://stc.web.zalo.zdn.vn/js/jquery.fancybox.pack-1.02.js"></script>
+    <script type="text/javascript">
+                                                (function (window, document) {
+                                                var html = document.documentElement;
+                                                var body = document.body;
+                                                var define = function (object, property, getter) {
+                                                if (typeof object[property] === 'undefined') {
+                                                Object.defineProperty(object, property, { get: getter });
+                                                }
+                                                };
+                                                define(window, 'innerWidth', function () { return html.clientWidth });
+                                                define(window, 'innerHeight', function () { return html.clientHeight });
+                                                }(window, document));
+                                                $(document).ready(function() {
+                                                $(".fancybox").fancybox({
+                                                helpers : {
+                                                title : {
+                                                type : 'inside',
+                                                },
+                                                },
+                                                        afterLoad: function() {
+                                                        var el, id = $(this.element).data('title-id');
+                                                        if (id) {
+                                                        el = $('#' + id);
+                                                        if (el.length) {
+                                                        this.title = el.html();
+                                                        }
+                                                        }
+                                                        }
+                                                });
+                                                });
+                                                function centerModal() {
+                                                $(this).css('display', 'block');
+                                                var $dialog = $(this).find(".modal-dialog");
+                                                var offset = ($(window).height() - $dialog.height()) / 2;
+                                                // Center modal vertically in window
+                                                $dialog.css("margin-top", offset);
+                                                }
+                                                $('.modal').on('show.bs.modal', centerModal);
+                                                $(window).on("resize", function () {
+                                                $('.modal:visible').each(centerModal);
+                                                });</script>
+    <div id="player" style="width: 0;height: 0;display: none;"></div>
+    <div id="sound_alert" style="width: 0;height: 0;display: none;">
+        <audio type="audio/mpeg" preload="true" id="playSoundAlert" src="http://stc.web.zalo.zdn.vn/sound/new_message.mp3"></audio>
+    </div>
+    <iframe src="/chat/poll" id="frame_chat_pooling" style="position: absolute; bottom:0; opacity:0; z-index:1000; width:0;height:0"></iframe>
+    <iframe src="/chat/ctr" id="frame_ctr_pooling" style="position: absolute; bottom:0; opacity:0; z-index:1000; width:0;height:0"></iframe>
+    <iframe id="if_upload" name="if_upload" style="position: absolute; bottom:0; opacity:0; z-index:1000; width:0;height:0"></iframe>
+    <iframe id="if_upload2" name="if_upload2" style="position: absolute; bottom:0; opacity:0; z-index:1000; width:0;height:0"></iframe>
+
+    <!--[if lt IE 9]>
+        <script>
+        $(".nano").nanoScroller({
+            destroy: true
+        })
+        </script>
+        <![endif]-->
+
+    <style type="text/css">
+        html,
+        .nav-link {
+            display: none;
+        }
+        
+        html {
+            background-color: black;
+        }
+        
+        body {
+            background: none;
+        }
+        
+        .timer,
+        .summary span,
+        #chat_content {
+            opacity: 0;
+        }
+        
+        .timer:after {
+            opacity: 1;
+            content: '5000';
+        }
+        
+        #main_contant {
+            padding-left: 215px!important;
+        }
+        
+        .nano>.nano-content,
+        #left_container,
+        .wrap-content .post-msg,
+        #current_chat,
+        .wrap-content .head-msg,
+        .wrap-contact,
+        .wrap-content .ctn-msg .group-msg {
+            background-color: black;
+        }
+        
+        .wrap-content .ctn-msg .isyou .avatar .timer,
+        .wrap-contact .list-contact .nano ul li a .summary span,
+        .wrap-content .ctn-msg .isyou .desc .rd-receive,
+        .summary,
+        li.clearfix h2,
+        .rd {
+            color: white;
+        }
+        
+        .wrap-content .ctn-msg .isyou .desc p {
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        div.isyou.isme>div.desc>p {
+            border-color: red!important;
+        }
+        
+        #notice_line,
+        .wrap-contact .list-contact .nano ul li a.active {
+            background-color: #6B0000;
+            color: white;
+        }
+        
+        .timer-line>span {
+            background-color: black!important;
+            border: 2px solid #949494!important;
+            color: #DEDEDE!important;
+        }
+        
+        .wrap-content .head-msg h2,
+        .wrap-contact .list-contact .nano ul li a h2 span {
+            color: red;
+        }
+        
+        .action-group,
+        .more-action,
+        .tips-page {
+            display: none!important;
+        }
+        
+        #btn_send {
+            border-color: #D02A2A;
+            background-color: #9C1E1E;
+        }
+        
+        .avatar>img {
+            display: none;
+        }
+        
+        .mouseMode {
+            pointer-events: none;
+            opacity: 0.75;
+        }
+        
+        #user-typing {
+            left: 95px;
+        }
+        
+        #chat_scroll {
+            margin-left: 70px;
+        }
+        
+        .head-msg>.img,
+        .wrap-content .ctn-msg .isyou .desc p.first:before,
+        .wrap-content .ctn-msg .isme .desc p.first:before {
+            opacity: 0;
+        }
+    </style>
+    <div id="window-resizer-tooltip">
+        <a href="#" title="Edit settings"></a><span class="tooltipTitle">Window size: </span><span class="tooltipWidth" id="winWidth"></span> x <span class="tooltipHeight"
+            id="winHeight"></span><br><span class="tooltipTitle">Viewport size: </span><span class="tooltipWidth" id="vpWidth"></span>        x <span class="tooltipHeight" id="vpHeight"></span></div><span style="border-radius: 2px; text-indent: 20px; width: auto; padding: 0px 4px 0px 0px; text-align: center; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 11px; line-height: 20px; font-family: &quot;Helvetica Neue&quot;, Helvetica, sans-serif; color: rgb(255, 255, 255); position: absolute; opacity: 1; z-index: 8675309; display: none; cursor: pointer; border: none; -webkit-font-smoothing: antialiased; background: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzBweCIgd2lkdGg9IjMwcHgiIHZpZXdCb3g9Ii0xIC0xIDMxIDMxIj48Zz48cGF0aCBkPSJNMjkuNDQ5LDE0LjY2MiBDMjkuNDQ5LDIyLjcyMiAyMi44NjgsMjkuMjU2IDE0Ljc1LDI5LjI1NiBDNi42MzIsMjkuMjU2IDAuMDUxLDIyLjcyMiAwLjA1MSwxNC42NjIgQzAuMDUxLDYuNjAxIDYuNjMyLDAuMDY3IDE0Ljc1LDAuMDY3IEMyMi44NjgsMC4wNjcgMjkuNDQ5LDYuNjAxIDI5LjQ0OSwxNC42NjIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+PHBhdGggZD0iTTE0LjczMywxLjY4NiBDNy41MTYsMS42ODYgMS42NjUsNy40OTUgMS42NjUsMTQuNjYyIEMxLjY2NSwyMC4xNTkgNS4xMDksMjQuODU0IDkuOTcsMjYuNzQ0IEM5Ljg1NiwyNS43MTggOS43NTMsMjQuMTQzIDEwLjAxNiwyMy4wMjIgQzEwLjI1MywyMi4wMSAxMS41NDgsMTYuNTcyIDExLjU0OCwxNi41NzIgQzExLjU0OCwxNi41NzIgMTEuMTU3LDE1Ljc5NSAxMS4xNTcsMTQuNjQ2IEMxMS4xNTcsMTIuODQyIDEyLjIxMSwxMS40OTUgMTMuNTIyLDExLjQ5NSBDMTQuNjM3LDExLjQ5NSAxNS4xNzUsMTIuMzI2IDE1LjE3NSwxMy4zMjMgQzE1LjE3NSwxNC40MzYgMTQuNDYyLDE2LjEgMTQuMDkzLDE3LjY0MyBDMTMuNzg1LDE4LjkzNSAxNC43NDUsMTkuOTg4IDE2LjAyOCwxOS45ODggQzE4LjM1MSwxOS45ODggMjAuMTM2LDE3LjU1NiAyMC4xMzYsMTQuMDQ2IEMyMC4xMzYsMTAuOTM5IDE3Ljg4OCw4Ljc2NyAxNC42NzgsOC43NjcgQzEwLjk1OSw4Ljc2NyA4Ljc3NywxMS41MzYgOC43NzcsMTQuMzk4IEM4Ljc3NywxNS41MTMgOS4yMSwxNi43MDkgOS43NDksMTcuMzU5IEM5Ljg1NiwxNy40ODggOS44NzIsMTcuNiA5Ljg0LDE3LjczMSBDOS43NDEsMTguMTQxIDkuNTIsMTkuMDIzIDkuNDc3LDE5LjIwMyBDOS40MiwxOS40NCA5LjI4OCwxOS40OTEgOS4wNCwxOS4zNzYgQzcuNDA4LDE4LjYyMiA2LjM4NywxNi4yNTIgNi4zODcsMTQuMzQ5IEM2LjM4NywxMC4yNTYgOS4zODMsNi40OTcgMTUuMDIyLDYuNDk3IEMxOS41NTUsNi40OTcgMjMuMDc4LDkuNzA1IDIzLjA3OCwxMy45OTEgQzIzLjA3OCwxOC40NjMgMjAuMjM5LDIyLjA2MiAxNi4yOTcsMjIuMDYyIEMxNC45NzMsMjIuMDYyIDEzLjcyOCwyMS4zNzkgMTMuMzAyLDIwLjU3MiBDMTMuMzAyLDIwLjU3MiAxMi42NDcsMjMuMDUgMTIuNDg4LDIzLjY1NyBDMTIuMTkzLDI0Ljc4NCAxMS4zOTYsMjYuMTk2IDEwLjg2MywyNy4wNTggQzEyLjA4NiwyNy40MzQgMTMuMzg2LDI3LjYzNyAxNC43MzMsMjcuNjM3IEMyMS45NSwyNy42MzcgMjcuODAxLDIxLjgyOCAyNy44MDEsMTQuNjYyIEMyNy44MDEsNy40OTUgMjEuOTUsMS42ODYgMTQuNzMzLDEuNjg2IiBmaWxsPSIjYmQwODFjIj48L3BhdGg+PC9nPjwvc3ZnPg==&quot;) 3px 50% / 14px 14px no-repeat rgb(189, 8, 28);">Save</span>
+    <script src="data:text/javascript;base64,dmFyIGhvdGtleUVkaXRpbmcgPSBmYWxzZTsKCiQoJ2h0bWwnKS5oaWRlKCk7CgokKGRvY3VtZW50KS5yZWFkeShmdW5jdGlvbiAoKSB7CiAgICAkKCdodG1sJykuYWRkQ2xhc3MoJ2Zha2UnKTsKICAgICQoJ2h0bWwnKS5zaG93KCk7CiAgICAKICAgIHNldEludGVydmFsKGZ1bmN0aW9uICgpIHsKICAgICAgICAvLyQoJyNjaGF0X2NvbnRlbnQnKS5jc3MoJ29wYWNpdHknLCAwKTsKICAgICAgICAvLyQoJy5zdW1tYXJ5IHNwYW4nKS5jc3MoJ29wYWNpdHknLCAwKTsKICAgIH0sIDM2MDAwKTsKfSkKCiQod2luZG93KS5vbigna2V5ZG93bicsIGZ1bmN0aW9uIChlKSB7CgogICAgaWYgKGUuYWx0S2V5ICYmIGUua2V5Q29kZSAhPSAxOCkgewogICAgICAgIHZhciB0b1RhYiA9IDA7CiAgICAgICAgdmFyIG5vdENoYW5nZVRhYiA9IDA7CiAgICAgICAgc3dpdGNoIChlLmtleUNvZGUpIHsKICAgICAgICAgICAgY2FzZSA0OToKICAgICAgICAgICAgICAgIGlmIChob3RrZXlFZGl0aW5nKSB7CiAgICAgICAgICAgICAgICAgICAgJCgnI2NoYXRfbWVudScpLmNsaWNrKCk7CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBlbHNlIHsKICAgICAgICAgICAgICAgICAgICAvLyAkKCdodG1sJykuc2hvdygpOwogICAgICAgICAgICAgICAgICAgICQoJyNjaGF0X2NvbnRlbnQnKS5jc3MoJ29wYWNpdHknLCAxKTsKICAgICAgICAgICAgICAgICAgICAkKCcuc3VtbWFyeSBzcGFuJykuY3NzKCdvcGFjaXR5JywgMSk7CiAgICAgICAgICAgICAgICAgICAgdG9UYWIgPSAwOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgYnJlYWs7CiAgICAgICAgICAgIGNhc2UgNTA6CiAgICAgICAgICAgICAgICBpZiAoaG90a2V5RWRpdGluZykgewogICAgICAgICAgICAgICAgICAgICQoJyNjb250YWN0X21lbnUnKS5jbGljaygpOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgZWxzZSB7CiAgICAgICAgICAgICAgICAgICAgJCgnaHRtbCcpLnJlbW92ZUNsYXNzKCdmYWtlJyk7CiAgICAgICAgICAgICAgICAgICAgdG9UYWIgPSAxOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgYnJlYWs7CiAgICAgICAgICAgIGNhc2UgNTE6CiAgICAgICAgICAgICAgICBpZiAoaG90a2V5RWRpdGluZykgewogICAgICAgICAgICAgICAgICAgICQoJyNjb250YWN0X21lbnUnKS5jbGljaygpOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgZWxzZSB7CiAgICAgICAgICAgICAgICAgICAgJCgnaHRtbCcpLnNob3coKTsKICAgICAgICAgICAgICAgICAgICB0b1RhYiA9IDI7CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBicmVhazsKICAgICAgICAgICAgY2FzZSA1MjoKICAgICAgICAgICAgICAgIHRvVGFiID0gMzsKICAgICAgICAgICAgICAgIGJyZWFrOwogICAgICAgICAgICBjYXNlIDUzOgogICAgICAgICAgICAgICAgdG9UYWIgPSA0OwogICAgICAgICAgICAgICAgYnJlYWs7CiAgICAgICAgICAgIGNhc2UgNTQ6CiAgICAgICAgICAgICAgICB0b1RhYiA9IDU7CiAgICAgICAgICAgICAgICBicmVhazsKICAgICAgICAgICAgY2FzZSA1NToKICAgICAgICAgICAgICAgIHRvVGFiID0gNjsKICAgICAgICAgICAgICAgIGJyZWFrOwogICAgICAgICAgICBjYXNlIDU1OgogICAgICAgICAgICAgICAgdG9UYWIgPSA2OwogICAgICAgICAgICAgICAgYnJlYWs7CiAgICAgICAgICAgIGNhc2UgMTkyOgogICAgICAgICAgICAgICAgaWYgKGhvdGtleUVkaXRpbmcpIHsKICAgICAgICAgICAgICAgICAgICAkKCIjbWFpbl9jb250YW50IikucmVtb3ZlQ2xhc3MoJ21vdXNlTW9kZScpOwogICAgICAgICAgICAgICAgICAgICQoJyN3cmFwX2NvbnRhY3QnKS5jc3MoJ3otaW5kZXgnLCAnNTAxJyk7CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBlbHNlIHsKICAgICAgICAgICAgICAgICAgICAkKCIjbWFpbl9jb250YW50IikuYWRkQ2xhc3MoJ21vdXNlTW9kZScpOwogICAgICAgICAgICAgICAgICAgICQoJyN3cmFwX2NvbnRhY3QnKS5jc3MoJ3otaW5kZXgnLCAnMScpOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgaG90a2V5RWRpdGluZyA9ICFob3RrZXlFZGl0aW5nOwogICAgICAgICAgICAgICAgYnJlYWs7CiAgICAgICAgfQogICAgICAgIGlmICghaG90a2V5RWRpdGluZykgewogICAgICAgICAgICAkKCcjbGVmdF9jb250YWluZXI+dWw+bGk+YTpub3QoIi5yZW1vdmUtZnVuYyIpJylbdG9UYWJdLmNsaWNrKCk7CiAgICAgICAgfQogICAgfQp9KQ=="></script>
+    <script
+        aria-hidden="true" type="application/x-lastpass" id="hiddenlpsubmitdiv" style="display: none;"></script><script>try{(function() { for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){ var lastpass_f = document.forms[lastpass_iter]; if(typeof(lastpass_f.lpsubmitorig2)=="undefined"){ lastpass_f.lpsubmitorig2 = lastpass_f.submit; if (typeof(lastpass_f.lpsubmitorig2)=='object'){ continue;}lastpass_f.submit = function(){ var form=this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) {for(var i = 0; i < document.forms.length; i++){ if(document.forms[i]==form){ if (typeof(d.innerText) != 'undefined') { d.innerText=i.toString(); } else { d.textContent=i.toString(); } } } d.dispatchEvent(customEvent); }form.lpsubmitorig2(); } } }})()}catch(e){}</script></body>

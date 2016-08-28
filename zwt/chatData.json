@@ -1,0 +1,14 @@
+[
+    {
+        "chatIndex": 0,
+        "chatImg": "",
+        "chatName": "",
+        "chatMessages": [
+            {
+                "message": "",
+                "time": "",
+                "isMe": true
+            }
+        ]
+    }
+]
