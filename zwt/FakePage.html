@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <style>
+        .send-button.enabled {
+            background-color: rgb(156, 30, 30);
+            background-image: none;
+            border-bottom-color: rgb(208, 42, 42);
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-image-outset: 0px;
+            border-image-repeat: stretch;
+            border-image-slice: 100%;
+            border-image-source: none;
+            border-image-width: 1;
+            border-left-color: rgb(208, 42, 42);
+            border-left-style: solid;
+            border-left-width: 1px;
+            border-right-color: rgb(208, 42, 42);
+            border-right-style: solid;
+            border-right-width: 1px;
+            border-top-color: rgb(208, 42, 42);
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-top-style: solid;
+            border-top-width: 1px;
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            display: block;
+            float: right;
+            font-family: Arial, sans-serif;
+            font-size: 15.162px;
+            font-stretch: normal;
+            font-style: normal;
+            font-variant-caps: normal;
+            font-variant-ligatures: normal;
+            font-variant-numeric: normal;
+            font-weight: bold;
+            height: 34px;
+            line-height: 34px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 0px;
+            outline-color: rgb(255, 255, 255);
+            outline-style: none;
+            outline-width: 0px;
+            padding-bottom: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 0px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            white-space: nowrap;
+            width: 66px;
+            z-index: 3;
+            -webkit-font-smoothing: antialiased;
+            -webkit-user-select: none;
+        }
+        
+        ul.clearfix {
+            list-style: none;
+            list-style-type: none;
+            padding-left: 0px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            max-height: 960px;
+        }
+        
+        ul.clearfix>li {
+            height: 66px;
+            border-bottom: 1px solid white;
+            cursor: pointer;
+        }
+        
+        ul.clearfix>li.active {
+            background-color: #6B0000;
+        }
+        
+        ul.clearfix>li>div {
+            float: left;
+        }
+        
+        .avt-container {
+            width: 66px;
+            /*background-color: red;*/
+            height: 66px;
+            padding-top: 10px;
+            padding-left: 15px;
+        }
+        
+        .avt>img {
+            width: 46px;
+            height: 46px;
+            border-radius: 100%;
+        }
+        
+        .headerName,
+        .headerText {
+            overflow: hidden;
+            height: 16px;
+            width: 10vw;
+        }
+        
+        .headerName {
+            margin-top: 8px;
+            margin-bottom: 5px;
+            color: red;
+            font-weight: bold;
+            font-size: 16px;
+            height: 20px;
+        }
+        
+        .headerText {
+            font-size: 12px;
+            font-weight: 200;
+        }
+        
+        .avt {
+            width: 46px;
+            height: 46px;
+            background-color: grey;
+            /*float:right;*/
+            border-radius: 100%;
+        }
+        
+        .chatMessage {
+            border: 2px solid white;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 200;
+            margin: 20px;
+            display: table;
+            max-width: 600px;
+        }
+        
+        .myText {
+            border-color: red;
+            margin-right: 100px;
+            margin-left: auto;
+            width: auto;
+        }
+        
+        .thereText {
+            border-color: white;
+            margin-left: 100px;
+            margin-right: auto;
+            width: auto;
+        }
+        
+        #titleName {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body style="background-color: black; color:white; padding-top:40px; padding-bottom: 40px;">
+    <div class="container" style="">
+        <div class="row" style="min-height:100%;height:100%">
+            <div class="row" style="border-bottom:1px solid white">
+
+                <div class="col-xs-3" style="padding:5px 15px; border-right: 1px solid white">
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <input type="text" class="form-control" placeholder="Tìm kiếm" style="font-size:12px">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-9">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="titleName" style="font-size: 16px; color: rgb(255,0,0);">Kingstar</div>
+                            <div id="lastActive" style="color: rgb(137, 164, 174); font-size:12px;">Truy cập 1 giờ trước</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="border-bottom: 1px solid white;">
+                <div class="col-xs-3" style="border-right: 1px solid white; height:960px; padding:0px;">
+                    <ul class="clearfix">
+                        <li class="active">
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/7/9/7/2/67/120/1131a3eaed3a68265703d34b92ed348b.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/a/9/0/9/20/120/1c78248b61e66d226a108b76fe886bdf.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/b/5/d/0/38/120/68f7212576d22f69d3e6777944197158.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/4/2/1/1/63/120/af49d002be4a026c2ad0684803604e0f.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/3/9/3/f/98/120/8009de717aacb8b2411c12d3495baccc.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/6/5/1/7/16/120/5ef27aac67acec3bffa7de363e1ad583.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/a/a/8/8/17/120/612b33e288e3c1cbbda469a3406aed4a.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/3/6/6/d/6/120/5ab55c8753b8fa908ffd39aa87316a29.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/8/1/9/d/64/120/41e2a6484aebfd3b2bcada0264fcb93e.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/f/7/3/7/2/120/92688fbf1bb6d084b967b2a0d9179cfe.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/c/f/6/2/45/120/e3e9c4880fc22542e9e75d355f96e693.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/d/c/0/4/19/120/32921f5fd4839da2c4b87b7972c98fe6.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/2/a/4/a/85/120/d59a911db7e399335ff6f2cae96e7ff3.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/4/7/e/5/140/120/5139dda5319b30e93a7b26a150980373.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/3/1/e/3/72/120/35a3702b80c1fb489897e73e3f1254da.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/e/0/c/f/88/120/46237f1041be44619fe5f02117e66597.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/e/c/4/4/158/120/dd5c8ce9c9723edbdc134e7c87d5a94c.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+                        <li>
+                            <div class="avt-container">
+                                <div class="avt">
+                                    <img src="http://s120.avatar.talk.zdn.vn/e/1/8/6/45/120/a8e78c19296ac3d327ee2c4da23b0928.jpg">
+                                </div>
+                            </div>
+                            <div class="headerName">
+                                Mỹ Ngân
+                            </div>
+                            <div class="headerText">
+                                Hello e. Hiện tại do bận công việc...
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-xs-9">
+                    <div class="row">
+                        <div id="messageContent" class="col-xs-12" style="height:900px; border-bottom: 1px solid white">
+                            <div class="chatMessage myText">
+                                Hello e. Hiện tại do bận công việc, nên a cũng ko muốn giữ mối quan hệ này nữa. Mặc dù bữa giờ chẳng qua nói chuyện chit
+                                chat qua lại thôi nhưng a muốn rõ ràng cho e biết, và a ko muốnt tiếp tục nữa do a thấy chit
+                                chat vầy consume kha khá time của a. Dù gì cũng cám ơn em đã chia sẽ cho a blah blah này
+                                nọ trong mấy ngày qua. Chúc e học tập và làm việc tốt.
+                            </div>
+                        </div>
+                        <div class="col-xs-10" style="height:40px; margin-top: 13px;">
+                            <input id="messageArea" type="text" class="form-control" placeholder="" style="font-size:12px">
+                        </div>
+                        <div class="col-xs-2">
+                            <button id="sendMessage" class="send-button enabled" style="margin-top: 13px;">Gửi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function() {
+        $('#sendMessage').on('click', function() {
+            addMessage();
+        });
+
+        $('#messageArea').on('keypress', function(e) {
+            if(e.keyCode == 13) {
+                addMessage();
+            }
+        });
+
+        initIndex();
+        addAllThereMessage(0);
+
+        $('ul.clearfix>li').on('click', function(e) {
+            $('ul.clearfix>li').removeClass('active');
+            $(this).addClass('active');
+            var headerName = $(this).find('.headerName').text().trim();
+            $('#titleName').text(headerName);
+            reloadContent();
+            var index = $(this).data('index');
+            addAllThereMessage(index);
+        });
+    });
+
+    var defaultMessage = 'Hello e. Hiện tại do bận công việc, nên a cũng ko muốn giữ mối quan hệ này nữa. Mặc dù bữa giờ chẳng qua nói chuyện chit chat qua lại thôi nhưng a muốn rõ ràng cho e biết, và a ko muốnt tiếp tục nữa do a thấy chit chat vầy consume kha khá time của a. Dù gì cũng cám ơn em đã chia sẽ cho a blah blah này nọ trong mấy ngày qua. Chúc e học tập và làm việc tốt.';
+
+    var thereMessages = [
+        ["Om", "Chuc a may man va thanh cong trong cong viec"],
+        ["Uh"],
+        ["Uhm, thì e cũng biết a bận mà, a cứ lo việc a đi"],
+        ["..."],
+        [],
+        ["Okie", "Thanks for all the things you have taught me."],
+        ["Cút"],
+        ["Cứ tưởng gì ghê gớm, chứ nếu a bận thì thôi a cứ làm đi :D"],
+        [],
+        ["Okie", "Hehe", "Lúc nào rãnh thì nc sau cũng dc"],
+        ["Uk", "Khi khák nc"],
+        ["ờ.","BiẾt RồI.","hÔm NàO cÓ DịP ThÌ NóI cHuYệN tIếP."],
+        ["Ok"],
+        [],
+        ["Yup.", "See you later"],
+        ["Haha. Chán rồi à.", "Vậy thôi.", "Bye"],
+        [],
+        ["Ahihi đồ ngox"]
+
+    ];
+
+    var thereNames = [
+        "Mỹ Ngân",
+        "Chuột yêu gạo",
+        "Thảo Thùy",
+        "Dâu tây Ngốc",
+        "T N B N",
+        "Châu chấu",
+        "Phạm Lý Mỹ Trang",
+        "Peheo",
+        "Junee",
+        "Alone",
+        "Alex",
+        "Bé Ngốc Yêu Anh",
+        "Hello",
+        "Nhã Như",
+        "Mai",
+        "MOMO",
+        "Tiktok",
+        "Rain"
+    ]
+
+    function reloadContent() {
+        $('#messageContent').html('');
+        addMyMessage(defaultMessage);
+    }
+
+    function initIndex() {
+        var lis = $('ul.clearfix>li');
+        var list = [];
+        for(var i = 0 ; i < lis.length ; i ++ ) {
+            list.push(i);
+        }
+
+        list.forEach(function(e) {
+            $(lis[e]).data({'index' : e });
+            $(lis[e]).find('.headerName').text(thereNames[e]);
+            var thisHeaderText = thereMessages[e];
+            if(thisHeaderText) {
+                $(lis[e]).find('.headerText').text(thisHeaderText[thisHeaderText.length -1]);
+            }
+        });
+    }
+
+    function addAllThereMessage(index) {
+        var currentMessages = thereMessages[index];
+        for(var i = 0 ; i < currentMessages.length ; i++) {
+            addThereMessage(currentMessages[i]);
+        }
+    }
+    
+    function addMyMessage(text) {
+        var html = '<div class="chatMessage myText">';
+        html += text;
+        html += '</div>';
+        appendHtml(html);
+    }
+
+    function addThereMessage(text) {
+        var html = '<div class="chatMessage thereText">';
+        html += text;
+        html += '</div>';
+        appendHtml(html);
+    }
+
+    function appendHtml(html) {
+        $('#messageContent').append(html);
+    }
+
+    function addMessage(index) {
+        $('#messageContent').val('');
+    }
+    </script>
+
+</html>
